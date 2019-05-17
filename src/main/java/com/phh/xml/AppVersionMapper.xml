@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.phh.dao.AppVersionMapper">
+  <resultMap id="BaseResultMap" type="com.phh.domain.AppVersion">
+    <id column="verId" jdbcType="BIGINT" property="verId" />
+    <result column="appType" jdbcType="SMALLINT" property="appType" />
+    <result column="platType" jdbcType="SMALLINT" property="platType" />
+    <result column="versionCode" jdbcType="INTEGER" property="versionCode" />
+    <result column="versionName" jdbcType="VARCHAR" property="versionName" />
+    <result column="forced" jdbcType="SMALLINT" property="forced" />
+    <result column="download" jdbcType="VARCHAR" property="download" />
+    <result column="state" jdbcType="SMALLINT" property="state" />
+    <result column="valid" jdbcType="SMALLINT" property="valid" />
+    <result column="createId" jdbcType="BIGINT" property="createId" />
+    <result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="modifyId" jdbcType="BIGINT" property="modifyId" />
+    <result column="modifyDate" jdbcType="TIMESTAMP" property="modifyDate" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.phh.domain.AppVersion">
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    verId, appType, platType, versionCode, versionName, forced, download, state, valid, 
+    createId, createDate, modifyId, modifyDate
+  </sql>
+  <sql id="Blob_Column_List">
+    content
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sys_app_version
+    where verId = #{verId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from sys_app_version
+    where verId = #{verId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.phh.domain.AppVersion">
+    insert into sys_app_version (verId, appType, platType, 
+      versionCode, versionName, forced, 
+      download, state, valid, 
+      createId, createDate, modifyId, 
+      modifyDate, content)
+    values (#{verId,jdbcType=BIGINT}, #{appType,jdbcType=SMALLINT}, #{platType,jdbcType=SMALLINT}, 
+      #{versionCode,jdbcType=INTEGER}, #{versionName,jdbcType=VARCHAR}, #{forced,jdbcType=SMALLINT}, 
+      #{download,jdbcType=VARCHAR}, #{state,jdbcType=SMALLINT}, #{valid,jdbcType=SMALLINT}, 
+      #{createId,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP}, #{modifyId,jdbcType=BIGINT}, 
+      #{modifyDate,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.phh.domain.AppVersion">
+    insert into sys_app_version
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="verId != null">
+        verId,
+      </if>
+      <if test="appType != null">
+        appType,
+      </if>
+      <if test="platType != null">
+        platType,
+      </if>
+      <if test="versionCode != null">
+        versionCode,
+      </if>
+      <if test="versionName != null">
+        versionName,
+      </if>
+      <if test="forced != null">
+        forced,
+      </if>
+      <if test="download != null">
+        download,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="valid != null">
+        valid,
+      </if>
+      <if test="createId != null">
+        createId,
+      </if>
+      <if test="createDate != null">
+        createDate,
+      </if>
+      <if test="modifyId != null">
+        modifyId,
+      </if>
+      <if test="modifyDate != null">
+        modifyDate,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="verId != null">
+        #{verId,jdbcType=BIGINT},
+      </if>
+      <if test="appType != null">
+        #{appType,jdbcType=SMALLINT},
+      </if>
+      <if test="platType != null">
+        #{platType,jdbcType=SMALLINT},
+      </if>
+      <if test="versionCode != null">
+        #{versionCode,jdbcType=INTEGER},
+      </if>
+      <if test="versionName != null">
+        #{versionName,jdbcType=VARCHAR},
+      </if>
+      <if test="forced != null">
+        #{forced,jdbcType=SMALLINT},
+      </if>
+      <if test="download != null">
+        #{download,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=SMALLINT},
+      </if>
+      <if test="valid != null">
+        #{valid,jdbcType=SMALLINT},
+      </if>
+      <if test="createId != null">
+        #{createId,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyId != null">
+        #{modifyId,jdbcType=BIGINT},
+      </if>
+      <if test="modifyDate != null">
+        #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.phh.domain.AppVersion">
+    update sys_app_version
+    <set>
+      <if test="appType != null">
+        appType = #{appType,jdbcType=SMALLINT},
+      </if>
+      <if test="platType != null">
+        platType = #{platType,jdbcType=SMALLINT},
+      </if>
+      <if test="versionCode != null">
+        versionCode = #{versionCode,jdbcType=INTEGER},
+      </if>
+      <if test="versionName != null">
+        versionName = #{versionName,jdbcType=VARCHAR},
+      </if>
+      <if test="forced != null">
+        forced = #{forced,jdbcType=SMALLINT},
+      </if>
+      <if test="download != null">
+        download = #{download,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=SMALLINT},
+      </if>
+      <if test="valid != null">
+        valid = #{valid,jdbcType=SMALLINT},
+      </if>
+      <if test="createId != null">
+        createId = #{createId,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null">
+        createDate = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyId != null">
+        modifyId = #{modifyId,jdbcType=BIGINT},
+      </if>
+      <if test="modifyDate != null">
+        modifyDate = #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where verId = #{verId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.phh.domain.AppVersion">
+    update sys_app_version
+    set appType = #{appType,jdbcType=SMALLINT},
+      platType = #{platType,jdbcType=SMALLINT},
+      versionCode = #{versionCode,jdbcType=INTEGER},
+      versionName = #{versionName,jdbcType=VARCHAR},
+      forced = #{forced,jdbcType=SMALLINT},
+      download = #{download,jdbcType=VARCHAR},
+      state = #{state,jdbcType=SMALLINT},
+      valid = #{valid,jdbcType=SMALLINT},
+      createId = #{createId,jdbcType=BIGINT},
+      createDate = #{createDate,jdbcType=TIMESTAMP},
+      modifyId = #{modifyId,jdbcType=BIGINT},
+      modifyDate = #{modifyDate,jdbcType=TIMESTAMP},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where verId = #{verId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.phh.domain.AppVersion">
+    update sys_app_version
+    set appType = #{appType,jdbcType=SMALLINT},
+      platType = #{platType,jdbcType=SMALLINT},
+      versionCode = #{versionCode,jdbcType=INTEGER},
+      versionName = #{versionName,jdbcType=VARCHAR},
+      forced = #{forced,jdbcType=SMALLINT},
+      download = #{download,jdbcType=VARCHAR},
+      state = #{state,jdbcType=SMALLINT},
+      valid = #{valid,jdbcType=SMALLINT},
+      createId = #{createId,jdbcType=BIGINT},
+      createDate = #{createDate,jdbcType=TIMESTAMP},
+      modifyId = #{modifyId,jdbcType=BIGINT},
+      modifyDate = #{modifyDate,jdbcType=TIMESTAMP}
+    where verId = #{verId,jdbcType=BIGINT}
+  </update>
+</mapper>

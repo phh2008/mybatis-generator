@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.phh.dao.BankMapper">
+  <resultMap id="BaseResultMap" type="com.phh.domain.Bank">
+    <id column="bankId" jdbcType="BIGINT" property="bankId" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="hxbSubCode" jdbcType="VARCHAR" property="hxbSubCode" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="branchName" jdbcType="VARCHAR" property="branchName" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+    <result column="sn" jdbcType="INTEGER" property="sn" />
+    <result column="state" jdbcType="SMALLINT" property="state" />
+    <result column="valid" jdbcType="SMALLINT" property="valid" />
+    <result column="createId" jdbcType="BIGINT" property="createId" />
+    <result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="modifyId" jdbcType="BIGINT" property="modifyId" />
+    <result column="modifyDate" jdbcType="TIMESTAMP" property="modifyDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    bankId, code, hxbSubCode, name, branchName, note, sn, state, valid, createId, createDate, 
+    modifyId, modifyDate
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_bank
+    where bankId = #{bankId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from sys_bank
+    where bankId = #{bankId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.phh.domain.Bank">
+    <selectKey keyProperty="bankId" order="BEFORE" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into sys_bank (bankId, code, hxbSubCode, 
+      name, branchName, note, 
+      sn, state, valid, 
+      createId, createDate, modifyId, 
+      modifyDate)
+    values (#{bankId,jdbcType=BIGINT}, #{code,jdbcType=VARCHAR}, #{hxbSubCode,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{branchName,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}, 
+      #{sn,jdbcType=INTEGER}, #{state,jdbcType=SMALLINT}, #{valid,jdbcType=SMALLINT}, 
+      #{createId,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP}, #{modifyId,jdbcType=BIGINT}, 
+      #{modifyDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.phh.domain.Bank">
+    <selectKey keyProperty="bankId" order="BEFORE" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into sys_bank
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      bankId,
+      <if test="code != null">
+        code,
+      </if>
+      <if test="hxbSubCode != null">
+        hxbSubCode,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="branchName != null">
+        branchName,
+      </if>
+      <if test="note != null">
+        note,
+      </if>
+      <if test="sn != null">
+        sn,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="valid != null">
+        valid,
+      </if>
+      <if test="createId != null">
+        createId,
+      </if>
+      <if test="createDate != null">
+        createDate,
+      </if>
+      <if test="modifyId != null">
+        modifyId,
+      </if>
+      <if test="modifyDate != null">
+        modifyDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      #{bankId,jdbcType=BIGINT},
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="hxbSubCode != null">
+        #{hxbSubCode,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="branchName != null">
+        #{branchName,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null">
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="sn != null">
+        #{sn,jdbcType=INTEGER},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=SMALLINT},
+      </if>
+      <if test="valid != null">
+        #{valid,jdbcType=SMALLINT},
+      </if>
+      <if test="createId != null">
+        #{createId,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyId != null">
+        #{modifyId,jdbcType=BIGINT},
+      </if>
+      <if test="modifyDate != null">
+        #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.phh.domain.Bank">
+    update sys_bank
+    <set>
+      <if test="code != null">
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="hxbSubCode != null">
+        hxbSubCode = #{hxbSubCode,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="branchName != null">
+        branchName = #{branchName,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null">
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="sn != null">
+        sn = #{sn,jdbcType=INTEGER},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=SMALLINT},
+      </if>
+      <if test="valid != null">
+        valid = #{valid,jdbcType=SMALLINT},
+      </if>
+      <if test="createId != null">
+        createId = #{createId,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null">
+        createDate = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyId != null">
+        modifyId = #{modifyId,jdbcType=BIGINT},
+      </if>
+      <if test="modifyDate != null">
+        modifyDate = #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where bankId = #{bankId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.phh.domain.Bank">
+    update sys_bank
+    set code = #{code,jdbcType=VARCHAR},
+      hxbSubCode = #{hxbSubCode,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      branchName = #{branchName,jdbcType=VARCHAR},
+      note = #{note,jdbcType=VARCHAR},
+      sn = #{sn,jdbcType=INTEGER},
+      state = #{state,jdbcType=SMALLINT},
+      valid = #{valid,jdbcType=SMALLINT},
+      createId = #{createId,jdbcType=BIGINT},
+      createDate = #{createDate,jdbcType=TIMESTAMP},
+      modifyId = #{modifyId,jdbcType=BIGINT},
+      modifyDate = #{modifyDate,jdbcType=TIMESTAMP}
+    where bankId = #{bankId,jdbcType=BIGINT}
+  </update>
+</mapper>
